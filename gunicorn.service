@@ -1,0 +1,14 @@
+[Unit]
+Description=demo fastapi application
+After=network.target
+
+[Service]
+User=robinmuhia
+Group=robinmuhia
+WorkingDirectory=/home/robinmuhia/app/src/
+EnvironmentFile = /home/robinmuhia/.env
+Environment="PATH=/home/robinmuhia/app/venv/bin"
+ExecStart=/home/robinmuhia/app/venv/bin/gunicorn -w 4 -k uvicorn.workers.UvicornWorker app.main:app --bind 0.0.0.0:8000
+
+[Install]
+WantedBy=multi-user.target
